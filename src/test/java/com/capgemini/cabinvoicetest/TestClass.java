@@ -3,6 +3,7 @@ package com.capgemini.cabinvoicetest;
 import org.junit.Test;
 
 import com.capgemini.cabinvoicegenerator.InvoiceGenerator;
+import com.capgemini.cabinvoicegenerator.Ride;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,5 +32,12 @@ public class TestClass {
 		int time = 1;
 		double fare = invoiceGenerator.calculateFare(distance, time);
 		Assert.assertEquals(5, fare, 0.0);
+	}
+
+	@Test
+	public void givenMultipleRideReturnTotalFare() {
+		Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
+		double fare = invoiceGenerator.calculateFare(rides);
+		Assert.assertEquals(30, fare, 0.0);
 	}
 }
