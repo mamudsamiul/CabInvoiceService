@@ -3,6 +3,7 @@ package com.capgemini.cabinvoicetest;
 import org.junit.Test;
 
 import com.capgemini.cabinvoicegenerator.InvoiceGenerator;
+import com.capgemini.cabinvoicegenerator.InvoiceSummary;
 import com.capgemini.cabinvoicegenerator.Ride;
 
 import static org.junit.Assert.assertEquals;
@@ -35,9 +36,10 @@ public class TestClass {
 	}
 
 	@Test
-	public void givenMultipleRideReturnTotalFare() {
+	public void givenMultipleRideReturnInvoiceSummary() {
 		Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
-		double fare = invoiceGenerator.calculateFare(rides);
-		Assert.assertEquals(30, fare, 0.0);
+		InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
+		InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0);
+		Assert.assertEquals(expectedSummary, summary);
 	}
 }
