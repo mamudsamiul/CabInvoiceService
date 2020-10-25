@@ -5,6 +5,7 @@ import org.junit.Test;
 import com.capgemini.cabinvoicegenerator.InvoiceGenerator;
 import com.capgemini.cabinvoicegenerator.InvoiceSummary;
 import com.capgemini.cabinvoicegenerator.Ride;
+import com.capgemini.cabinvoicegenerator.RideRepository;
 
 import static org.junit.Assert.assertEquals;
 
@@ -41,5 +42,15 @@ public class TestClass {
 		InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
 		InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0);
 		Assert.assertEquals(expectedSummary, summary);
+	}
+
+	@Test
+	public void givenUserIdReturnInvoiceSummary() {
+		String userId = "samiul";
+		RideRepository rideRepository = new RideRepository();
+		Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
+		rideRepository.addUserRide(userId, rides);
+		Ride[] userRides = rideRepository.getUserRides(userId);
+		Assert.assertEquals(rides[1], userRides[1]);
 	}
 }
